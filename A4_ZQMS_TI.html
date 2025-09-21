@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nokia: De la Cima a la Irrelevancia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .slide h2 {
+            color: #34495e;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .slide h3 {
+            color: #e74c3c;
+            font-size: 1.5em;
+            margin: 20px 0 15px 0;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .slide ul {
+            margin-left: 25px;
+        }
+
+        .slide ol {
+            margin-left: 25px;
+        }
+
+        .slide li {
+            margin-bottom: 10px;
+        }
+
+        .portada {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .portada h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .portada .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .portada .company {
+            font-size: 2em;
+            color: #f39c12;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .portada .author {
+            font-size: 1.2em;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f39c12 0%, #f1c40f 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .failure-reasons {
+            background: linear-gradient(120deg, #e74c3c 0%, #c0392b 100%);
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .success-model {
+            background: linear-gradient(120deg, #27ae60 0%, #2ecc71 100%);
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .success-model h3 {
+            color: black;
+        }
+
+        .failure-reasons h3 {
+            color: black;
+        }
+
+        .highlight h3 {
+            color: black;
+        }
+
+        .references {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .references h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .references ol li {
+            font-size: 0.95em;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">5</span>
+        </div>
+
+        <!-- Diapositiva 1: Portada -->
+        <div class="slide active portada">
+            <div class="subtitle">Actividad 4: Empresas que fracasan</div>
+            <div class="subtitle">TRANSFORMAR PARA IMPACTAR</div>
+            <h1>NOKIA</h1>
+            <div class="company">De la Cima a la Irrelevancia</div>
+            <div class="author">Zureyma Quetzaili Manrique Santiago</div>
+        </div>
+
+        <!-- Diapositiva 2: Síntesis del Modelo de Negocio Fracasado -->
+        <div class="slide">
+            <h1>Síntesis del Modelo de Negocio Fracasado</h1>
+            
+            <div class="highlight">
+                <h3>🏗️ El Gigante de Hardware que Ignoró el Software</h3>
+            </div>
+
+            <p>El modelo de negocio de Nokia hasta principios de los 2000 se basaba en tres pilares:</p>
+
+            <ol>
+                <li><strong>Dominio a través del Hardware:</strong> Su foco era diseñar y fabricar teléfonos móviles que eran percibidos como los más duraderos, confiables y con la mejor duración de batería del mercado. Modelos como el Nokia 3310 se convirtieron en iconos culturales.</li>
+                
+                <li><strong>Economías de Escala:</strong> Producían millones de dispositivos a un costo relativamente bajo, lo que les permitía tener un catálogo muy amplio, desde teléfonos básicos para mercados emergentes hasta dispositivos más avanzados para el mercado occidental.</li>
+                
+                <li><strong>Sistema Operativo Propio (Symbian):</strong> Controlaban su propio software, lo que les daba independencia. Sin embargo, Symbian era complejo para los desarrolladores y no estaba preparado para una experiencia de usuario táctil e intuitiva.</li>
+            </ol>
+
+            <div class="failure-reasons">
+                <h3>❌ ¿Por qué fracasó este modelo?</h3>
+                <p>El lanzamiento del iPhone de Apple en 2007 cambió las reglas del juego. El valor ya no estaba solo en el dispositivo físico, sino en la <strong>experiencia del usuario y el ecosistema de aplicaciones</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Diapositiva 3: Propuesta de un Nuevo Modelo de Negocio -->
+        <div class="slide">
+            <h1>Propuesta de un Nuevo Modelo de Negocio</h1>
+            
+            <div class="success-model">
+                <h3>📱 "Nokia con Android: Calidad y Ecosistema"</h3>
+            </div>
+
+            <p>La propuesta de un modelo de negocio alternativo se centra en combinar la principal fortaleza de Nokia (su hardware) con el ecosistema de software que el mercado estaba demandando.</p>
+
+            <ol>
+                <li><strong>Adopción Temprana de Android (2009-2010):</strong> En lugar de desarrollar sistemas operativos propios o aliarse con Microsoft, la estrategia clave habría sido adoptar Android como sistema operativo principal. Esto les habría dado acceso instantáneo a un ecosistema de aplicaciones en plena expansión.</li>
+
+                <li><strong>Creación de una Capa de Personalización Premium:</strong> Sobre Android, Nokia podría haber desarrollado una interfaz de usuario exclusiva (similar a lo que hizo Samsung con TouchWiz) enfocada en la <strong>seguridad, la fluidez y la fotografía</strong>, aprovechando sus alianzas con empresas como Carl Zeiss para las ópticas de sus cámaras.</li>
+
+                <li><strong>Diferenciación por Segmentos:</strong>
+                    <ul>
+                        <li><strong>Gama Alta (Línea "Lumia" con Android):</strong> Dispositivos con la mejor calidad de construcción, las cámaras más avanzadas del mercado y una experiencia Android pura y segura.</li>
+                        <li><strong>Gama Media (Línea "Asha" con Android):</strong> Teléfonos duraderos y asequibles con acceso completo a Google Play, enfocados en mercados emergentes.</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Diapositiva 4: Descripción del Escenario Alternativo de Éxito -->
+        <div class="slide">
+            <h1>Escenario Alternativo de Éxito</h1>
+
+            <p>Si Nokia hubiera implementado el modelo de negocio propuesto, el escenario habría sido radicalmente diferente:</p>
+
+            <div class="success-model">
+                <h3>🏆 Resultados del Modelo Alternativo</h3>
+                
+                <ul>
+                    <li><strong>Líder del Ecosistema Android:</strong> Nokia, con su capacidad de producción masiva y su reputación de calidad, se habría posicionado como el <strong>principal socio de Google</strong> y el fabricante de hardware líder en el ecosistema Android, un lugar que finalmente ocupó Samsung.</li>
+
+                    <li><strong>Competencia Directa con Apple:</strong> La combinación de hardware premium (cámaras, durabilidad) y un software robusto y popular (Android) habría permitido a Nokia competir cara a cara con Apple en el segmento de gama alta. Los consumidores tendrían una alternativa clara: la simplicidad de iOS o la calidad y personalización de "Nokia-Android".</li>
+
+                    <li><strong>Supervivencia y Rentabilidad:</strong> La compañía habría evitado la venta de su división móvil a Microsoft en 2013 y, en lugar de declararse casi en quiebra, se habría mantenido como una de las empresas tecnológicas más rentables y valiosas del mundo, asegurando su legado en la era de los smartphones.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Diapositiva 5: Conclusiones y Referencias -->
+        <div class="slide">
+            <h1>Conclusiones y Referencias</h1>
+
+            <h2>💡 Conclusiones</h2>
+            <p>El caso de Nokia es una lección fundamental para cualquier líder de mercado:</p>
+
+            <ul>
+                <li><strong>La Innovación no es solo mejorar lo existente,</strong> sino entender y adaptarse a las nuevas tecnologías disruptivas. Nokia se centró en mejorar el teléfono, pero no vio que el futuro era el ecosistema de software.</li>
+
+                <li><strong>El liderazgo no garantiza la supervivencia.</strong> Una cultura empresarial demasiado rígida y lenta para tomar decisiones puede llevar al fracaso incluso a la empresa más dominante.</li>
+
+                <li><strong>Escuchar al mercado es crucial.</strong> Mientras Nokia seguía enfocado en sus fortalezas tradicionales, los consumidores ya estaban demandando nuevas experiencias de usuario que sus competidores supieron ofrecer.</li>
+            </ul>
+
+            <div class="references">
+                <h3>📚 Referencias (Formato APA 7)</h3>
+                <ol>
+                    <li>Calva Tapia, E. (s.f.). <em>La caída del imperio Nokia, de líder mundial a lección empresarial</em>. Emprendedor.com. Recuperado el 21 de septiembre de 2025, de https://emprendedor.com/la-caida-del-imperio-nokia-de-lider-mundial-a-leccion-empresarial/</li>
+
+                    <li>Evalue. (2025, 17 de septiembre). <em>El caso Nokia: el inmovilismo del líder y la falta de innovación</em>. Evalue Consultores. Recuperado el 21 de septiembre de 2025, de https://evalueconsultores.com/nokia-innovacion-lider/</li>
+
+                    <li>Hernández, E. (2015, 24 de septiembre). <em>La razón del hundimiento de Nokia. Y es algo que pasa todos los días en tu empresa</em>. El Confidencial. Recuperado el 21 de septiembre de 2025, de https://www.elconfidencial.com/alma-corazon-vida/2015-09-24/la-razon-del-hundimiento-de-nokia-y-es-algo-que-pasa-todos-los-dias-en-tu-empresa_1033982/</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
