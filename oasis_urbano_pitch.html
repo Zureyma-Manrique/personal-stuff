@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oasis Urbano - Pitch de Inversión</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+            background-color: #f0f2f5;
+            /* FONDO AÑADIDO */
+        }
+
+        .slide {
+            width: 210mm;
+            min-height: 297mm;
+            /* CAMBIO: de height a min-height */
+            margin: 20px auto;
+            /* AÑADIDO: Margen para centrar la hoja */
+            padding: 50px;
+            page-break-after: always;
+            background: white;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            /* AÑADIDO: Sombra para efecto de hoja */
+            /* overflow: hidden; -- ELIMINADO PARA EVITAR CORTES */
+        }
+
+        /* Portada ultra dinámica */
+        .slide-portada {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            /* Se mantiene aquí porque el diseño de la portada lo requiere */
+        }
+
+        .slide-portada::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .slide-portada::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.1);
+            }
+        }
+
+        .slide-portada .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-portada h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .slide-portada .subtitle {
+            font-size: 28px;
+            margin-bottom: 50px;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .slide-portada .location {
+            font-size: 20px;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        .investment-highlight {
+            background: white;
+            color: #667eea;
+            padding: 30px 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            font-size: 22px;
+            margin-top: 30px;
+        }
+
+        .investment-highlight strong {
+            font-size: 48px;
+            display: block;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Encabezados dinámicos */
+        h2 {
+            font-size: 42px;
+            margin-bottom: 35px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 5px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Círculo Dorado ultra visual */
+        .circulo-dorado {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .circulo-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .circulo-item:hover {
+            transform: translateX(10px);
+        }
+
+        .circulo-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .circulo-item.why {
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        }
+
+        .circulo-item.how {
+            border-left-color: #3498db;
+            background: linear-gradient(135deg, #a8e6cf 0%, #56ccf2 100%);
+        }
+
+        .circulo-item.what {
+            border-left-color: #2ecc71;
+            background: linear-gradient(135deg, #c7ecee 0%, #6dd5ed 100%);
+        }
+
+        .circulo-item strong {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .circulo-item p {
+            font-size: 16px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Cards modulares con sombras */
+        .business-model {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .model-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 3px solid transparent;
+            background-image: linear-gradient(white, white), linear-gradient(135deg, #667eea, #764ba2);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .model-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .model-item h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Cajas de inversión llamativas */
+        .investment-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 25px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .investment-box::before {
+            content: '💰';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .investment-box h3 {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            justify-content: center;
+        }
+
+        .investment-amount {
+            font-size: 56px;
+            font-weight: 800;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .currency-convert {
+            font-size: 22px;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Timeline visual mejorado */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            z-index: 0;
+            border-radius: 4px;
+        }
+
+        .timeline-item {
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 15px;
+            padding: 20px;
+            width: 28%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.05);
+            border-color: #764ba2;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #667eea;
+        }
+
+        .timeline-item strong {
+            display: block;
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        /* Grid de beneficios mejorado */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #2ecc71;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);
+        }
+
+        .benefit-card h4 {
+            color: #2ecc71;
+            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Caja de evidencias destacada */
+        .evidence-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 3px solid #ffc107;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
+        }
+
+        .evidence-box h4 {
+            color: #856404;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Testimoniales modernos */
+        .testimonial {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            border-left: 5px solid #ffc107;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            font-size: 80px;
+            color: rgba(255, 193, 7, 0.2);
+            top: -10px;
+            left: 10px;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial p {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .testimonial strong {
+            font-style: normal;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        /* Listas estilizadas */
+        ul {
+            margin-left: 25px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        li::before {
+            content: '▸';
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: -15px;
+        }
+
+        /* Price tags llamativos */
+        .price-tag {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            font-size: 16px;
+        }
+
+        /* Canvas mejorado */
+        .canvas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .canvas-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid #667eea;
+            min-height: 140px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .canvas-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
+        }
+
+        .canvas-item h4 {
+            color: #667eea;
+            font-size: 15px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .canvas-item ul {
+            font-size: 13px;
+            margin-left: 18px;
+        }
+
+        /* Footer elegante */
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        /* Elementos decorativos */
+        .decorator-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .decorator-circle.c1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: -100px;
+            right: -100px;
+        }
+
+        .decorator-circle.c2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            bottom: -80px;
+            left: -80px;
+        }
+
+        /* Highlight boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 6px solid #2ecc71;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(46, 204, 113, 0.2);
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #ffee58 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #fbc02d;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(251, 192, 45, 0.2);
+        }
+
+        /* Stats destacados */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        @media print {
+            .slide {
+                margin: 0;
+                box-shadow: none;
+            }
+
+            body {
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide slide-portada">
+        <div class="content">
+            <h1>🌿 Oasis Urbano</h1>
+            <div class="subtitle">Sistema Modular de Purificación de Aire y Agua</div>
+            <div class="location">📍 Shenzhen, China • 2025</div>
+            <div class="investment-highlight">
+                Propuesta de Inversión Inicial
+                <strong>$84,000 MXN</strong>
+                <span style="font-size: 16px; opacity: 0.7;">(¥35,000 CNY | $4,900 USD)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c1"></div>
+        <h2>🎯 Nuestra Propuesta: El Círculo Dorado</h2>
+
+        <div class="circulo-dorado">
+            <div class="circulo-item why">
+                <strong>❤️ POR QUÉ (Why)</strong>
+                <p>Creemos que todos en las grandes ciudades merecen respirar aire puro y beber agua limpia dentro de su
+                    propio hogar. Nuestra misión es empoderar a las familias para que tomen el control de su ambiente
+                    inmediato, mejorando su salud y bienestar en el rápido ritmo de vida de Shenzhen.</p>
+            </div>
+
+            <div class="circulo-item how">
+                <strong>⚙️ CÓMO (How)</strong>
+                <p>Lo logramos a través de tecnología inteligente y un diseño modular. Creamos un sistema adaptable que
+                    crece con las necesidades del usuario, combinando un diseño minimalista con la eficiencia
+                    tecnológica que caracteriza a Shenzhen. Hacemos que la tecnología de punta para la salud sea
+                    accesible.</p>
+            </div>
+
+            <div class="circulo-item what">
+                <strong>📦 QUÉ (What)</strong>
+                <p>Ofrecemos "Oasis Urbano", un sistema inteligente de purificación. Comienza con un módulo de
+                    purificación de aire y se puede expandir con módulos para purificar agua, monitorear la calidad del
+                    ambiente y más, todo controlado desde una simple aplicación móvil.</p>
+            </div>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 1</div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c2"></div>
+        <h2>🌆 El Contexto: Shenzhen</h2>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">17.5M</div>
+                <div class="stat-label">Habitantes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Penetración Smartphones</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$24K</div>
+                <div class="stat-label">Ingreso Promedio MXN</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">#1</div>
+                <div class="stat-label">Hub Tecnológico</div>
+            </div>
+        </div>
+
+        <h3>⚠️ Desafíos Ambientales</h3>
+        <div class="business-model">
+            <div class="model-item">
+                <h4>🌫️ Contaminación del Aire</h4>
+                <p>Niveles PM2.5 frecuentemente superiores a los estándares de la OMS. Problema crítico para familias
+                    con niños.</p>
+            </div>
+
+            <div class="model-item">
+                <h4>💧 Calidad del Agua</h4>
+                <p>Preocupaciones sobre metales pesados y contaminantes industriales en el suministro urbano.</p>
+            </div>
+        </div>
+
+        <h3>✨ Oportunidades Únicas</h3>
+        <ul style="font-size: 17px; line-height: 2;">
+            <li><strong>Hub de manufactura electrónica:</strong> Acceso directo a componentes en Huaqiangbei</li>
+            <li><strong>Alta adopción tecnológica:</strong> Población joven y tech-savvy</li>
+            <li><strong>Conciencia ambiental creciente:</strong> Demanda activa de soluciones</li>
+            <li><strong>Urbanización acelerada:</strong> Miles de nuevos apartamentos cada año</li>
+        </ul>
+
+        <div class="footer">Oasis Urbano | Página 2</div>
+    </div>
+
+    <div class="slide">
+        <h2>🏭 Plan de Manufactura y Distribución</h2>
+
+        <h3>🔧 Proceso de Manufactura</h3>
+        <div class="business-model">
+            <div class="model-item">
+                <h4>⚡ Componentes Electrónicos</h4>
+                <p><strong>Fuente:</strong> Mercados Huaqiangbei</p>
+                <p>Sensores PM2.5, microcontroladores Wi-Fi/Bluetooth, PCBs personalizados</p>
+            </div>
+
+            <div class="model-item">
+                <h4>🌬️ Sistemas de Filtración</h4>
+                <p><strong>Fuente:</strong> Fabricantes Guangdong</p>
+                <p>Filtros HEPA, carbón activado, ósmosis inversa certificados</p>
+            </div>
+
+            <div class="model-item">
+                <h4>♻️ Carcasas Sustentables</h4>
+                <p><strong>Material:</strong> ABS 100% reciclado</p>
+                <p>Moldeado por inyección con empresas locales de reciclaje</p>
+            </div>
+
+            <div class="model-item">
+                <h4>🔧 Ensamblaje Ágil</h4>
+                <p><strong>Método:</strong> Fabricación modular</p>
+                <p>Prototipado rápido, producción escalable, QA integrado</p>
+            </div>
+        </div>
+
+        <h3>📦 Estrategia de Distribución en Fases</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Fase 1 (M1-6)</strong>
+                <p>D2C vía WeChat y Tmall. Control total de experiencia</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Fase 2 (M7-12)</strong>
+                <p>Alianzas con desarrolladores inmobiliarios</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Fase 3 (M13+)</strong>
+                <p>Expansión B2B oficinas y retail físico</p>
+            </div>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 3</div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c1"></div>
+        <h2>💎 Estrategia Base de la Pirámide (BoP)</h2>
+
+        <div class="business-model">
+            <div class="model-item">
+                <h4>💰 PRECIO ACCESIBLE</h4>
+                <p><strong>Diseño Modular Inteligente:</strong></p>
+                <ul>
+                    <li>Unidad base: <span class="price-tag">$2,150 MXN</span></li>
+                    <li>Módulos: <span class="price-tag">$950-1,430 MXN</span></li>
+                    <li>Suscripción: <span class="price-tag">$117 MXN/mes</span></li>
+                </ul>
+                <p style="margin-top: 10px; font-style: italic;">Compra gradual según necesidades</p>
+            </div>
+
+            <div class="model-item">
+                <h4>🌱 SUSTENTABILIDAD</h4>
+                <ul>
+                    <li>✅ Carcasas ABS 100% reciclado</li>
+                    <li>✅ Programa devolución de filtros</li>
+                    <li>✅ Consumo 30W máximo</li>
+                    <li>✅ Huella de carbono reducida</li>
+                    <li>✅ Certificación ambiental</li>
+                </ul>
+            </div>
+
+            <div class="model-item">
+                <h4>✅ CALIDAD PREMIUM</h4>
+                <ul>
+                    <li>🏆 Certificados CE y RoHS</li>
+                    <li>🏆 Filtración HEPA 99.97%</li>
+                    <li>🏆 Garantía 2 años</li>
+                    <li>🏆 Pruebas de laboratorio</li>
+                    <li>🏆 Control de calidad estricto</li>
+                </ul>
+            </div>
+
+            <div class="model-item">
+                <h4>📈 RENTABILIDAD</h4>
+                <p><strong>Modelo de Ingresos Mixto:</strong></p>
+                <ul>
+                    <li>Margen hardware: 25-30%</li>
+                    <li>Margen filtros: 40-45%</li>
+                    <li>LTV/CAC ratio: 3:1</li>
+                    <li>Break-even: Mes 8</li>
+                    <li>ROI proyectado: 250% año 3</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 25px;">
+            <p style="font-size: 16px;"><strong>🎯 Estrategia BoP en acción:</strong> Permitimos que familias de clase
+                media accedan a tecnología premium mediante pagos modulares y suscripciones, generando ingresos
+                recurrentes mientras democratizamos el acceso a aire y agua limpios.</p>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 4</div>
+    </div>
+
+    <div class="slide">
+        <h2>📊 Business Model Canvas</h2>
+
+        <div class="canvas-grid">
+            <div class="canvas-item" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+                <h4>👥 Socios Clave</h4>
+                <ul>
+                    <li>Proveedores Huaqiangbei</li>
+                    <li>Fabricantes Guangdong</li>
+                    <li>Desarrolladores inmobiliarios</li>
+                    <li>Empresas reciclaje</li>
+                    <li>Laboratorios certificación</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #a8e6cf, #56ccf2);">
+                <h4>🎯 Actividades Clave</h4>
+                <ul>
+                    <li>Ensamblaje modular</li>
+                    <li>Desarrollo app IoT</li>
+                    <li>Control de calidad</li>
+                    <li>Marketing digital</li>
+                    <li>Servicio al cliente</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #c7ecee, #6dd5ed);">
+                <h4>💎 Propuesta de Valor</h4>
+                <ul>
+                    <li>Sistema modular adaptable</li>
+                    <li>Tecnología inteligente</li>
+                    <li>Salud familiar</li>
+                    <li>Diseño minimalista</li>
+                    <li>Precio accesible</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+                <h4>🤝 Relación Cliente</h4>
+                <ul>
+                    <li>Atención vía WeChat 24/7</li>
+                    <li>Comunidad de usuarios</li>
+                    <li>Updates OTA gratuitos</li>
+                    <li>Soporte técnico proactivo</li>
+                    <li>Programa de lealtad</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #a8e6cf, #56ccf2);">
+                <h4>👨‍👩‍👧‍👦 Segmento Cliente</h4>
+                <ul>
+                    <li>Profesionales 25-40 años</li>
+                    <li>Familias con niños</li>
+                    <li>Ingreso ¥10K+ /mes</li>
+                    <li>Distritos Nanshan/Futian</li>
+                    <li>Early adopters tech</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #c7ecee, #6dd5ed);">
+                <h4>🔑 Recursos Clave</h4>
+                <ul>
+                    <li>Know-how técnico</li>
+                    <li>Red proveedores local</li>
+                    <li>Plataforma WeChat/Tmall</li>
+                    <li>IP y patentes</li>
+                    <li>Equipo multidisciplinar</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);">
+                <h4>📢 Canales</h4>
+                <ul>
+                    <li>Mini Programa WeChat</li>
+                    <li>E-commerce Tmall</li>
+                    <li>Alianzas B2B</li>
+                    <li>Content marketing</li>
+                    <li>Influencers locales</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #a8e6cf, #56ccf2);">
+                <h4>💸 Estructura Costos</h4>
+                <ul>
+                    <li>Componentes: 40%</li>
+                    <li>Manufactura: 15%</li>
+                    <li>Marketing: 20%</li>
+                    <li>Operación: 10%</li>
+                    <li>I+D: 10%</li>
+                    <li>Reserva: 5%</li>
+                </ul>
+            </div>
+
+            <div class="canvas-item" style="background: linear-gradient(135deg, #c7ecee, #6dd5ed);">
+                <h4>💰 Flujos Ingreso</h4>
+                <ul>
+                    <li>Venta hardware (60%)</li>
+                    <li>Suscripción filtros (25%)</li>
+                    <li>Módulos adicionales (10%)</li>
+                    <li>Servicios premium (5%)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 5</div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c2"></div>
+        <h2>✅ Evidencias: Adoptadores Tempranos</h2>
+
+        <div class="evidence-box">
+            <h4>📊 Metodología de Validación</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                <div><strong>👥 Grupo:</strong> 15 participantes</div>
+                <div><strong>📍 Ubicación:</strong> CDMX, GDL, MTY</div>
+                <div><strong>💰 Perfil:</strong> Clase media ($15K-$35K MXN/mes)</div>
+                <div><strong>📅 Fecha:</strong> Sept-Oct 2025</div>
+            </div>
+            <p style="margin-top: 15px;"><strong>Método:</strong> Presentación virtual por Zoom + Sesión Q&A + Grupo
+                WhatsApp de seguimiento</p>
+            <p style="margin-top: 15px; font-style: italic; font-size: 14px;"><strong>Nota:</strong> Esta validación
+                inicial se realizó con un grupo demográfico análogo en México para probar el concepto. La siguiente
+                fase, financiada por esta inversión, priorizará una validación de mercado específica con usuarios en
+                Shenzhen para adaptar el producto a las sensibilidades culturales y de mercado locales.</p>
+        </div>
+
+        <h3>💬 Testimonios Reales</h3>
+
+        <div class="testimonial">
+            <p>Tengo dos hijos pequeños con alergias y la calidad del aire en la CDMX es terrible. Me encanta que pueda
+                empezar con el purificador básico y luego agregar el de agua. ¡Invierto $3,600 MXN!</p>
+            <strong>- María Fernanda González, 34 años, Ingeniera Civil (CDMX, Coyoacán)</strong>
+        </div>
+
+        <div class="testimonial">
+            <p>Trabajo en tecnología y la idea de controlar todo desde una app me convence totalmente. El diseño modular
+                es perfecto para irlo comprando poco a poco. Comprometo $4,800 MXN.</p>
+            <strong>- Jorge Ramírez, 29 años, Desarrollador de Software (Guadalajara, Zapopan)</strong>
+        </div>
+
+        <div class="testimonial">
+            <p>Me preocupa mucho el medio ambiente y que usen plástico reciclado es un gran punto a favor. Este producto
+                tiene sentido para ciudades como las nuestras. Cuenten con $4,200 MXN.</p>
+            <strong>- Andrea Morales, 37 años, Arquitecta (Monterrey, San Pedro)</strong>
+        </div>
+
+        <div class="stats-container" style="margin-top: 25px;">
+            <div class="stat-card" style="background: linear-gradient(135deg, #2ecc71, #27ae60);">
+                <div class="stat-number">93%</div>
+                <div class="stat-label">Interés Alto</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                <div class="stat-number">11/15</div>
+                <div class="stat-label">Compromisos</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                <div class="stat-number">$42K</div>
+                <div class="stat-label">Ya Comprometido</div>
+            </div>
+            <div class="stat-card" style="background: linear-gradient(135deg, #9b59b6, #8e44ad);">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">Meta Alcanzada</div>
+            </div>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 6</div>
+    </div>
+
+    <div class="slide">
+        <h2>💰 Propuesta de Inversión</h2>
+
+        <div class="investment-box">
+            <h3>Inversión Inicial Solicitada</h3>
+            <div class="investment-amount">$84,000 MXN</div>
+            <p class="currency-convert">(¥35,000 CNY | $4,900 USD)</p>
+        </div>
+
+        <h3>📋 Desglose Detallado del Uso de Fondos</h3>
+        <div class="business-model">
+            <div class="model-item" style="border-color: #3498db;">
+                <h4>🔬 Prototipado (43%)</h4>
+                <p style="font-size: 24px; font-weight: 700; color: #3498db; margin: 10px 0;">$36,000 MXN</p>
+                <ul style="font-size: 14px;">
+                    <li>5 prototipos funcionales</li>
+                    <li>Impresión 3D carcasas</li>
+                    <li>Componentes Huaqiangbei</li>
+                    <li>Testing y optimización</li>
+                </ul>
+            </div>
+
+            <div class="model-item" style="border-color: #9b59b6;">
+                <h4>📱 Desarrollo App (28%)</h4>
+                <p style="font-size: 24px; font-weight: 700; color: #9b59b6; margin: 10px 0;">$24,000 MXN</p>
+                <ul style="font-size: 14px;">
+                    <li>Mini Programa WeChat</li>
+                    <li>Dashboard monitoreo</li>
+                    <li>Sistema de alertas</li>
+                    <li>Integración IoT</li>
+                </ul>
+            </div>
+
+            <div class="model-item" style="grid-column: span 2; border-color: #2ecc71;">
+                <h4>✅ Certificación Inicial (29%)</h4>
+                <p style="font-size: 24px; font-weight: 700; color: #2ecc71; margin: 10px 0;">$24,000 MXN</p>
+                <ul style="font-size: 14px;">
+                    <li>Pruebas de seguridad eléctrica en laboratorio certificado</li>
+                    <li>Tests rigurosos eficiencia filtración HEPA (99.97%)</li>
+                    <li>Certificaciones CE y RoHS preliminares para exportación</li>
+                    <li>Documentación técnica completa para certificaciones internacionales</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <p style="font-size: 15px;"><strong>💡 Nota Importante:</strong> Esta inversión nos permite validar el
+                producto con prototipos reales antes de comprometer capital en producción masiva. Es el paso crítico
+                entre idea y negocio escalable.</p>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 7</div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c1"></div>
+        <h2>🗓️ Cronograma y Próximas Metas</h2>
+
+        <h3>⏱️ Fase Actual: Inversión Semilla (6 meses)</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>Mes 1-2</strong>
+                <p style="font-size: 14px;">Prototipado completo y desarrollo app MVP</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Mes 3-4</strong>
+                <p style="font-size: 14px;">Certificaciones y pruebas con usuarios beta</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Mes 5-6</strong>
+                <p style="font-size: 14px;">Refinamiento y prep. producción</p>
+            </div>
+        </div>
+
+        <h3>🎯 Siguiente Meta: Ronda Semilla</h3>
+        <div class="investment-box" style="margin-top: 25px;">
+            <h3>Objetivo de Financiamiento</h3>
+            <div class="investment-amount" style="font-size: 48px;">$600,000 MXN</div>
+            <p class="currency-convert">(¥250,000 CNY | $35,000 USD)</p>
+            <div style="margin-top: 20px; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px;">
+                <p><strong>Propósito:</strong> Primera producción 100 unidades</p>
+                <p><strong>Plazo:</strong> 6 meses post-prototipos</p>
+                <p><strong>Meta Año 1:</strong> 500 unidades = $1,075,000 MXN ingresos</p>
+            </div>
+        </div>
+
+        <h3>📊 KPIs de Éxito</h3>
+        <div class="business-model">
+            <div class="model-item">
+                <h4>✅ Técnicos</h4>
+                <ul style="font-size: 14px;">
+                    <li>5 prototipos funcionales</li>
+                    <li>Certificaciones CE y RoHS</li>
+                    <li>Costos ≤ $1,435 MXN/unidad</li>
+                </ul>
+            </div>
+            <div class="model-item">
+                <h4>✅ De Mercado</h4>
+                <ul style="font-size: 14px;">
+                    <li>50+ usuarios beta</li>
+                    <li>80%+ satisfacción</li>
+                    <li>3 alianzas comerciales</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 8</div>
+    </div>
+
+    <div class="slide">
+        <h2>💎 Retorno de Inversión y Beneficios</h2>
+
+        <h3>🔄 Opciones de Retorno para Inversionistas</h3>
+
+        <div class="business-model">
+            <div class="model-item"
+                style="background: linear-gradient(135deg, #a8e6cf, #56ccf2); border-color: #2ecc71;">
+                <h4 style="color: #1e7e34;">Opción A: Retorno Financiero</h4>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="font-size: 48px; font-weight: 800; color: #2ecc71;">1.5x</div>
+                    <p style="font-size: 16px; font-weight: 600;">Retorno garantizado</p>
+                </div>
+                <ul style="font-size: 14px;">
+                    <li><strong>Plazo:</strong> 12 meses</li>
+                    <li><strong>Fuente:</strong> Ingresos 1ª producción</li>
+                    <li><strong>Ejemplo:</strong> $4,800 → $7,200 MXN</li>
+                    <li><strong>Pago:</strong> Transferencia directa</li>
+                </ul>
+            </div>
+
+            <div class="model-item"
+                style="background: linear-gradient(135deg, #c7ecee, #6dd5ed); border-color: #3498db;">
+                <h4 style="color: #1565c0;">Opción B: Participación Accionaria</h4>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="font-size: 48px; font-weight: 800; color: #3498db;">2%</div>
+                    <p style="font-size: 16px; font-weight: 600;">Equity en la empresa</p>
+                </div>
+                <ul style="font-size: 14px;">
+                    <li><strong>Valuación:</strong> Pre-money $3.6M MXN</li>
+                    <li><strong>Potencial:</strong> Growth largo plazo</li>
+                    <li><strong>Derechos:</strong> Pro-rata siguiente ronda</li>
+                    <li><strong>Ventaja:</strong> Upside ilimitado</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>🎁 Beneficios Exclusivos VIP</h3>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h4>🥇 Unidad Edición Limitada</h4>
+                <p>Primera unidad "Oasis Urbano" con placa numerada, firmada por fundadores. Coleccionable y funcional.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>♾️ Suscripción Vitalicia</h4>
+                <p>Reemplazo gratuito de filtros de por vida. Ahorro de <strong>$1,404 MXN/año</strong>. Envíos gratis.
+                </p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>🎯 Descuento Preferencial</h4>
+                <p><strong>30% OFF permanente</strong> en módulos adicionales y futuros productos de la línea.</p>
+            </div>
+
+            <div class="benefit-card">
+                <h4>👥 Acceso VIP Comunidad</h4>
+                <p>Eventos exclusivos, acceso anticipado a nuevos productos, voz en decisiones de diseño.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 15px;"><strong>📅 Calendario de Pagos:</strong></p>
+            <ul style="font-size: 14px; margin-top: 10px;">
+                <li><strong>Mes 6:</strong> Entrega prototipos + Reporte progreso completo</li>
+                <li><strong>Mes 9:</strong> Inicio producción + Entrega unidades VIP</li>
+                <li><strong>Mes 12:</strong> Pago retorno (Opción A) o formalización equity (Opción B)</li>
+            </ul>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 9</div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c2"></div>
+        <h2>🚀 ¡Es Momento de Actuar!</h2>
+
+        <div
+            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); color: white; padding: 35px; border-radius: 25px; margin: 25px 0; box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);">
+            <h3
+                style="color: white; font-size: 36px; margin-bottom: 25px; text-align: center; justify-content: center;">
+                ¿Por qué invertir AHORA?</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div
+                    style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 56px; margin-bottom: 12px;">⏰</div>
+                    <strong style="font-size: 18px;">Timing Perfecto</strong>
+                    <p style="font-size: 14px; margin-top: 8px;">Conciencia sobre calidad del aire en punto más alto
+                        histórico</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 56px; margin-bottom: 12px;">💰</div>
+                    <strong style="font-size: 18px;">Bajo Riesgo</strong>
+                    <p style="font-size: 14px; margin-top: 8px;">Inversión inicial pequeña con validación antes de
+                        producción masiva</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 56px; margin-bottom: 12px;">🌍</div>
+                    <strong style="font-size: 18px;">Impacto Real</strong>
+                    <p style="font-size: 14px; margin-top: 8px;">Mejoras directas medibles en salud de familias urbanas
+                    </p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.15); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                    <div style="font-size: 56px; margin-bottom: 12px;">📈</div>
+                    <strong style="font-size: 18px;">Mercado Creciente</strong>
+                    <p style="font-size: 14px; margin-top: 8px;">Industria purificación valorada en $30 mil millones USD
+                        globalmente</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>💼 Resumen Ejecutivo de la Oportunidad</h3>
+        <div
+            style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 25px; border-radius: 15px; border: 3px solid #667eea; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 16px; line-height: 1.8;">
+                <div>✅ <strong>Inversión mínima:</strong> $3,000 MXN</div>
+                <div>✅ <strong>Meta total:</strong> $84,000 MXN</div>
+                <div>✅ <strong>Ya comprometido:</strong> $42,000 (50%)</div>
+                <div>✅ <strong>Plazo ejecución:</strong> 6 meses</div>
+                <div>✅ <strong>Retorno:</strong> 1.5x o 2% equity</div>
+                <div>✅ <strong>Bonus:</strong> Producto + descuentos</div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 25px;">📞 Próximos Pasos Inmediatos</h3>
+        <ol
+            style="font-size: 16px; line-height: 2; background: white; padding: 20px 20px 20px 45px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+            <li>Revisar presentación y plan de negocios detallado</li>
+            <li>Confirmar intención de inversión y monto deseado</li>
+            <li>Firmar acuerdo simple de inversión (contrato proporcionado)</li>
+            <li>Realizar transferencia bancaria (datos compartidos)</li>
+            <li>Recibir actualizaciones quincenales del proyecto</li>
+        </ol>
+
+        <div
+            style="text-align: center; margin-top: 30px; padding: 30px; background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 20px; box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);">
+            <p style="font-size: 28px; color: #2ecc71; font-weight: 700; margin-bottom: 15px; font-style: italic;">
+                "La mejor forma de predecir el futuro es crearlo"
+            </p>
+            <p style="font-size: 18px; color: #1e7e34; font-weight: 500;">
+                Únete a nosotros en la misión de llevar aire y agua limpios a millones de hogares urbanos.
+            </p>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 10</div>
+    </div>
+
+    <div class="slide">
+        <div class="decorator-circle c1"></div>
+        <h2>📚 Referencias y Contacto</h2>
+
+        <h3>📖 Referencias Bibliográficas</h3>
+        <div
+            style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid #667eea;">
+            <p style="margin-bottom: 20px; font-size: 14px; line-height: 1.8;">
+                <strong>Kawasaki, G.</strong> (2022, 19 de agosto). <em>Los 10 elementos de un pitch perfecto para un
+                    inversionista</em>. Entrepreneur.
+                <br><a
+                    href="https://www.entrepreneur.com/es/inversionistas/los-10-elementos-de-un-pitch-perfecto-para-un/272365"
+                    style="color: #667eea; text-decoration: none; font-weight: 600;">https://www.entrepreneur.com/es/inversionistas/los-10-elementos-de-un-pitch-perfecto-para-un/272365</a>
+            </p>
+            <p style="font-size: 14px; line-height: 1.8;">
+                <strong>BBVA.</strong> (2018, 12 de junio). <em>Base de la pirámide: una estrategia de negocio rentable
+                    y con impacto social</em>. BBVA EduFin.
+                <br><a href="https://www.bbva.com/es/base-la-piramide-una-estrategia-negocio-rentable-impacto-social/"
+                    style="color: #667eea; text-decoration: none; font-weight: 600;">https://www.bbva.com/es/base-la-piramide-una-estrategia-negocio-rentable-impacto-social/</a>
+            </p>
+        </div>
+
+        <h3>📞 Información de Contacto</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px;">
+            <div
+                style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                <h4 style="color: white; margin-bottom: 15px; font-size: 20px;">📧 Equipo Oasis Urbano</h4>
+                <p style="font-size: 15px; margin: 8px 0;"><strong>Email:</strong> contacto@oasisurbano.com</p>
+                <p style="font-size: 15px; margin: 8px 0;"><strong>WhatsApp:</strong> +52 55 1234 5678</p>
+                <p style="font-size: 15px; margin: 8px 0;"><strong>Ubicación:</strong> Ciudad de México</p>
+            </div>
+
+            <div
+                style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(46, 204, 113, 0.3);">
+                <h4 style="color: white; margin-bottom: 15px; font-size: 20px;">💼 Para Inversionistas</h4>
+                <p style="font-size: 15px; margin: 8px 0;"><strong>Horario:</strong> Lun-Vie 9:00-18:00</p>
+                <p style="font-size: 15px; margin: 8px 0;"><strong>Respuesta:</strong> 24-48 horas</p>
+                <p style="font-size: 15px; margin: 8px 0;"><strong>Sesiones:</strong> Por agendar</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 30px;">🌐 Síguenos en Redes Sociales</h3>
+        <div
+            style="text-align: center; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); border-radius: 20px; color: white; margin-top: 20px; box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);">
+            <p style="font-size: 18px; margin-bottom: 20px; font-weight: 600;">Mantente actualizado sobre el desarrollo
+                del proyecto</p>
+            <div style="display: flex; justify-content: center; gap: 40px; font-size: 16px; flex-wrap: wrap;">
+                <span
+                    style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 25px; backdrop-filter: blur(10px);">📱
+                    Instagram: @oasisurbano</span>
+                <span
+                    style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 25px; backdrop-filter: blur(10px);">🐦
+                    Twitter: @oasisurbano_mx</span>
+                <span
+                    style="background: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 25px; backdrop-filter: blur(10px);">💼
+                    LinkedIn: Oasis Urbano</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <div style="font-size: 64px; margin-bottom: 15px;">🌿</div>
+            <h2
+                style="color: #667eea; font-size: 42px; margin-bottom: 15px; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Gracias por tu interés</h2>
+            <p style="font-size: 22px; color: #555; font-weight: 500;">Juntos crearemos un futuro más limpio y saludable
+            </p>
+        </div>
+
+        <div class="footer">Oasis Urbano | Página 11</div>
+    </div>
+
+</body>
+
+</html>
