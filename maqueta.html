@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexión Madre-Trabajo | Equipo 7</title>
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            /* Rosa fuerte: fuerza y maternidad */
+            --secondary-color: #2c3e50;
+            /* Azul oscuro: profesionalismo corporativo */
+            --accent-color: #f39c12;
+            /* Naranja: energía y creatividad */
+            --light-bg: #f4f6f7;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        /* Encabezado y Navegación */
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Sección Hero (Principal) */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(233, 30, 99, 0.6)), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #d81b60;
+        }
+
+        /* Secciones Generales */
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+        }
+
+        /* Problema y Solución */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        /* Modelo de Negocio */
+        .business-model {
+            background-color: var(--light-bg);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .model-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .team-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .team-list li {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Empleo Inclusivo MX</div>
+            <nav>
+                <a href="#problema">El Reto</a>
+                <a href="#solucion">Solución</a>
+                <a href="#modelo">Modelo</a>
+                <a href="#equipo">Equipo 7</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Empleo Remoto Flexible para Madres Solteras</h1>
+        <p>Conectamos talento materno con empresas que valoran la calidad, ofreciendo un modelo de integración laboral
+            100% inclusivo.</p>
+        <a href="#contacto" class="btn">Conoce Nuestra Propuesta</a>
+    </div>
+
+    <section id="problema">
+        <h2>El Problema: Barreras de Acceso</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>🚧 Rigidez Laboral</h3>
+                <p>Los horarios estrictos son incompatibles con el cuidado de hijos, obligando a muchas madres a elegir
+                    entre trabajar o cuidar.</p>
+            </div>
+            <div class="card">
+                <h3>📉 Informalidad</h3>
+                <p>La necesidad lleva a aceptar empleos mal remunerados sin seguridad social, perpetuando el ciclo de
+                    pobreza.</p>
+            </div>
+            <div class="card">
+                <h3>🔙 Retroceso Post-Pandemia</h3>
+                <p>Reducción drástica de vacantes remotas tras el retorno forzado a la presencialidad en las empresas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucion" style="background-color: #f9f9f9;">
+        <h2>Nuestra Promesa de Valor</h2>
+        <div class="grid-container">
+            <div class="card" style="border-top-color: #3498db;">
+                <h3>👩 Para las Trabajadoras</h3>
+                <ul>
+                    <li><strong>Salarios Formales:</strong> Ingresos estables y dignos.</li>
+                    <li><strong>Flexibilidad Total:</strong> Trabajo por objetivos, no por horarios.</li>
+                    <li><strong>Capacitación:</strong> Formación constante en herramientas digitales.</li>
+                    <li><strong>Hardware:</strong> Provisión de equipo y conectividad.</li>
+                </ul>
+            </div>
+            <div class="card" style="border-top-color: #2ecc71;">
+                <h3>🏢 Para las Empresas</h3>
+                <ul>
+                    <li><strong>Talento Calificado:</strong> Personal entrenado para soporte y administración.</li>
+                    <li><strong>Reducción de Costos:</strong> Modelo optimizado de outsourcing.</li>
+                    <li><strong>Responsabilidad Social:</strong> Impacto directo en la reducción de la brecha de género.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="modelo">
+        <div class="business-model">
+            <h2>Modelo de Negocio y Escalabilidad</h2>
+            <p>Nuestro modelo se basa en la contratación y subcontratación ética (Outsourcing con impacto social).</p>
+
+            <div class="model-steps">
+                <div class="step">
+                    <span class="step-icon">📦</span>
+                    <h4>Paquetes de Servicio</h4>
+                    <p>Soporte técnico, administrativo y gestión de procesos.</p>
+                </div>
+                <div class="step">
+                    <span class="step-icon">💳</span>
+                    <h4>Pago Mensual</h4>
+                    <p>Las empresas pagan una suscripción por agente asignado.</p>
+                </div>
+                <div class="step">
+                    <span class="step-icon">📈</span>
+                    <h4>Escalabilidad</h4>
+                    <p>Piloto con 20 madres -> Expansión Nacional Remota.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="estrategia">
+        <h2>¿Cómo Funciona?</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p>Implementamos un ciclo de <strong>Capacitación ➡ Gestión ➡ Soporte</strong>. Las madres reciben formación
+                técnica y el hardware necesario. Su desempeño se mide por cumplimiento de KPIs, garantizando calidad
+                para el cliente y libertad de horario para ellas.</p>
+        </div>
+    </section>
+
+    <footer id="equipo">
+        <h3>Diseñar para Compartir</h3>
+        <p><strong>Docente:</strong> Adriana Ordoñez Peñaloza | <strong>Actividad 2:</strong> Maqueta y Sitio Web</p>
+
+        <div style="margin-top: 20px;">
+            <h4>Equipo 7</h4>
+            <ul class="team-list">
+                <li>Zureyma Quetzaili Manrique Santiago</li>
+                <li>Ricardo Patricio Granados Jimenez</li>
+                <li>Daniel Eduardo García Cabrera</li>
+            </ul>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.6;">&copy; 2026 Proyecto de Inclusión Social. Todos
+            los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
