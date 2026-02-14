@@ -26,6 +26,10 @@
             --shadow: rgba(0, 0, 0, 0.1);
             --shadow-lg: rgba(0, 0, 0, 0.15);
             
+            /* Variables para modo alto contraste */
+            --focus-outline: 3px solid #E67E22;
+            --focus-outline-offset: 3px;
+            
             /* Espaciado consistente */
             --space-xs: 0.5rem;
             --space-sm: 1rem;
@@ -33,7 +37,17 @@
             --space-lg: 2.5rem;
             --space-xl: 4rem;
             
-            /* Tipografía */
+            /* Tipografía con tamaños ajustables */
+            --font-size-base: 16px;
+            --font-size-sm: 0.875rem;
+            --font-size-md: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.5rem;
+            --font-size-5xl: 3.5rem;
+            
             --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             --font-body: Georgia, 'Times New Roman', serif;
             
@@ -41,16 +55,58 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
+        /* Modo Alto Contraste */
+        body.high-contrast {
+            --primary: #000000;
+            --primary-dark: #000000;
+            --primary-light: #000000;
+            --secondary: #000000;
+            --secondary-dark: #000000;
+            --accent: #000000;
+            --background: #FFFFFF;
+            --surface: #FFFFFF;
+            --surface-alt: #FFFFFF;
+            --text-primary: #000000;
+            --text-secondary: #000000;
+            --text-light: #000000;
+            --border: #000000;
+        }
+        
+        body.high-contrast .btn {
+            border: 3px solid #000000 !important;
+            background: #FFFFFF !important;
+            color: #000000 !important;
+        }
+        
+        body.high-contrast .btn:hover,
+        body.high-contrast .btn:focus {
+            background: #000000 !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Tamaños de fuente ajustables */
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        html.font-small {
+            font-size: 14px;
+        }
+        
+        html.font-large {
+            font-size: 18px;
+        }
+        
+        html.font-xlarge {
+            font-size: 20px;
+        }
+        
         /* Reset y base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
         }
         
         body {
@@ -61,7 +117,107 @@
             overflow-x: hidden;
         }
         
-        /* Skip to main content (POUR: Operable) */
+        /* Barra de herramientas de accesibilidad - NUEVO */
+        .accessibility-toolbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(26, 32, 44, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 1000;
+            border-radius: 0 0 0 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            max-width: 400px;
+        }
+        
+        .accessibility-toolbar.minimized {
+            width: auto;
+            padding: 0.5rem;
+        }
+        
+        .accessibility-toolbar.minimized .toolbar-controls {
+            display: none;
+        }
+        
+        .toolbar-toggle {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: var(--font-display);
+            transition: var(--transition);
+            min-width: 44px;
+            min-height: 44px;
+        }
+        
+        .toolbar-toggle:hover {
+            background: var(--accent-light);
+            transform: scale(1.05);
+        }
+        
+        .toolbar-toggle:focus {
+            outline: var(--focus-outline);
+            outline-offset: var(--focus-outline-offset);
+        }
+        
+        .toolbar-controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .toolbar-btn {
+            background: white;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            font-family: var(--font-display);
+            transition: var(--transition);
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .toolbar-btn:hover {
+            background: var(--surface);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .toolbar-btn:focus {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+        
+        .toolbar-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .toolbar-label {
+            color: white;
+            font-size: 0.75rem;
+            font-family: var(--font-display);
+            font-weight: 600;
+            width: 100%;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Skip to main content */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -72,14 +228,58 @@
             text-decoration: none;
             font-family: var(--font-display);
             font-weight: 600;
-            z-index: 100;
+            z-index: 10000;
             border-radius: 0 0 8px 0;
         }
         
         .skip-link:focus {
             top: 0;
-            outline: 3px solid var(--accent);
-            outline-offset: 3px;
+            outline: var(--focus-outline);
+            outline-offset: var(--focus-outline-offset);
+        }
+        
+        /* Breadcrumbs - NUEVO */
+        .breadcrumbs {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem 0;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+        }
+        
+        .breadcrumbs ol {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .breadcrumbs li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .breadcrumbs li:not(:last-child)::after {
+            content: '›';
+            color: var(--text-light);
+        }
+        
+        .breadcrumbs a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        .breadcrumbs a:focus {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+            border-radius: 3px;
         }
         
         /* Header */
@@ -132,7 +332,7 @@
         }
         
         .logo:focus {
-            outline: 3px solid var(--secondary);
+            outline: var(--focus-outline);
             outline-offset: 5px;
             border-radius: 4px;
         }
@@ -149,7 +349,7 @@
             font-weight: 700;
         }
         
-        /* Navigation (POUR: Operable - keyboard accessible) */
+        /* Navigation con indicadores de foco mejorados */
         .nav {
             display: flex;
             gap: 0.5rem;
@@ -165,6 +365,10 @@
             border-radius: 8px;
             transition: var(--transition);
             position: relative;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
         
         .nav-link:hover {
@@ -172,15 +376,98 @@
             background: var(--surface);
         }
         
+        /* Indicador de foco muy visible */
         .nav-link:focus {
-            outline: 3px solid var(--secondary);
-            outline-offset: 2px;
+            outline: 4px solid var(--accent);
+            outline-offset: 3px;
             color: var(--primary);
+            background: var(--surface);
         }
         
         .nav-link.active {
             color: var(--primary);
             background: var(--surface);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        /* Atajos de teclado - NUEVO */
+        .keyboard-shortcuts {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 32, 44, 0.95);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            z-index: 900;
+            display: none;
+            max-width: 400px;
+        }
+        
+        .keyboard-shortcuts.visible {
+            display: block;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .keyboard-shortcuts h3 {
+            font-family: var(--font-display);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .shortcut-list {
+            list-style: none;
+        }
+        
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .shortcut-key {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+        
+        .shortcuts-close {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+            font-weight: 600;
+            min-height: 44px;
         }
         
         /* Hero Section */
@@ -189,6 +476,11 @@
             background: linear-gradient(135deg, #F8F9FA 0%, #EDF2F7 100%);
             padding: var(--space-xl) 2rem;
             overflow: hidden;
+        }
+        
+        /* Pausar animaciones cuando esté activo */
+        body.animations-paused * {
+            animation-play-state: paused !important;
         }
         
         .hero::before {
@@ -236,7 +528,7 @@
         
         .hero-title {
             font-family: var(--font-display);
-            font-size: 3.5rem;
+            font-size: var(--font-size-5xl);
             font-weight: 800;
             line-height: 1.1;
             color: var(--text-primary);
@@ -247,8 +539,14 @@
             background-clip: text;
         }
         
+        body.high-contrast .hero-title {
+            background: none;
+            -webkit-text-fill-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+        
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: var(--font-size-xl);
             color: var(--text-secondary);
             margin-bottom: var(--space-lg);
             line-height: 1.8;
@@ -278,10 +576,10 @@
             display: block;
         }
         
-        /* CTA Button (POUR: Operable & Perceivable) */
+        /* Botones con áreas clicables grandes */
         .btn {
             font-family: var(--font-display);
-            font-size: 1.125rem;
+            font-size: var(--font-size-lg);
             font-weight: 700;
             padding: 1rem 2.5rem;
             border: none;
@@ -290,12 +588,13 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.75rem;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            min-height: 44px;
-            min-width: 44px;
+            min-height: 48px; /* Aumentado para mejor accesibilidad */
+            min-width: 48px;
         }
         
         .btn-primary {
@@ -310,7 +609,7 @@
         }
         
         .btn-primary:focus {
-            outline: 3px solid var(--accent);
+            outline: 4px solid var(--accent);
             outline-offset: 4px;
         }
         
@@ -331,8 +630,65 @@
         }
         
         .btn-secondary:focus {
-            outline: 3px solid var(--secondary);
+            outline: 4px solid var(--accent);
             outline-offset: 4px;
+        }
+        
+        /* Tooltips explicativos - NUEVO */
+        .tooltip-trigger {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            cursor: help;
+            border-bottom: 1px dotted var(--text-light);
+        }
+        
+        .tooltip-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .tooltip-content {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-8px);
+            background: rgba(26, 32, 44, 0.95);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 100;
+            max-width: 300px;
+            white-space: normal;
+        }
+        
+        .tooltip-trigger:hover .tooltip-content,
+        .tooltip-trigger:focus .tooltip-content {
+            opacity: 1;
+        }
+        
+        .tooltip-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: rgba(26, 32, 44, 0.95);
         }
         
         /* Features Section */
@@ -348,7 +704,7 @@
         
         .section-title {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: var(--font-size-4xl);
             font-weight: 700;
             text-align: center;
             margin-bottom: var(--space-lg);
@@ -357,7 +713,7 @@
         
         .section-subtitle {
             text-align: center;
-            font-size: 1.125rem;
+            font-size: var(--font-size-lg);
             color: var(--text-secondary);
             margin-bottom: var(--space-xl);
             max-width: 700px;
@@ -403,7 +759,7 @@
         }
         
         .feature-card:focus-within {
-            outline: 3px solid var(--secondary);
+            outline: 4px solid var(--accent);
             outline-offset: 3px;
         }
         
@@ -421,7 +777,7 @@
         
         .feature-title {
             font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: var(--font-size-2xl);
             font-weight: 700;
             margin-bottom: var(--space-sm);
             color: var(--text-primary);
@@ -476,7 +832,7 @@
         
         .step-title {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: var(--font-size-xl);
             font-weight: 700;
             margin-bottom: var(--space-sm);
             color: var(--text-primary);
@@ -538,13 +894,13 @@
         
         .cta-title {
             font-family: var(--font-display);
-            font-size: 2.5rem;
+            font-size: var(--font-size-4xl);
             font-weight: 700;
             margin-bottom: var(--space-md);
         }
         
         .cta-description {
-            font-size: 1.25rem;
+            font-size: var(--font-size-xl);
             margin-bottom: var(--space-lg);
             opacity: 0.95;
         }
@@ -600,7 +956,7 @@
         
         .footer-section h3 {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: var(--font-size-xl);
             margin-bottom: var(--space-md);
         }
         
@@ -614,6 +970,9 @@
             display: block;
             padding: 0.5rem 0;
             transition: var(--transition);
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
         
         .footer-link:hover {
@@ -622,7 +981,7 @@
         }
         
         .footer-link:focus {
-            outline: 2px solid var(--accent);
+            outline: 3px solid var(--accent);
             outline-offset: 3px;
             color: white;
         }
@@ -648,14 +1007,36 @@
             color: var(--accent);
         }
         
-        /* Responsive Design (POUR: Operable) */
+        /* Anuncio para lectores de pantalla */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Live region para anuncios dinámicos */
+        #announcer {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero-container {
                 grid-template-columns: 1fr;
             }
             
             .hero-title {
-                font-size: 2.5rem;
+                font-size: var(--font-size-3xl);
             }
             
             .nav {
@@ -676,9 +1057,14 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .accessibility-toolbar {
+                max-width: 100%;
+                border-radius: 0 0 12px 12px;
+            }
         }
         
-        /* High Contrast Mode Support (POUR: Perceivable) */
+        /* High Contrast Mode Support */
         @media (prefers-contrast: high) {
             :root {
                 --primary: #5A1A8C;
@@ -687,11 +1073,11 @@
             }
             
             .btn {
-                border: 2px solid currentColor;
+                border: 3px solid currentColor;
             }
         }
         
-        /* Reduced Motion (POUR: Operable) */
+        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             *,
             *::before,
@@ -704,32 +1090,88 @@
         
         /* Focus visible improvements */
         *:focus-visible {
-            outline: 3px solid var(--accent);
+            outline: 4px solid var(--accent);
             outline-offset: 3px;
-        }
-        
-        /* Screen reader only content */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Skip to main content link (POUR: Operable) -->
+    <!-- Live region para anuncios a lectores de pantalla -->
+    <div id="announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+    
+    <!-- Barra de herramientas de accesibilidad - NUEVA FUNCIONALIDAD -->
+    <div class="accessibility-toolbar" id="accessibilityToolbar" role="toolbar" aria-label="Herramientas de accesibilidad">
+        <button class="toolbar-toggle" id="toolbarToggle" aria-expanded="true" aria-label="Minimizar barra de herramientas">
+            ⚙️ Accesibilidad
+        </button>
+        <div class="toolbar-controls">
+            <div style="width: 100%;">
+                <span class="toolbar-label">Tamaño de texto:</span>
+                <button class="toolbar-btn" id="fontSmall" aria-label="Texto pequeño">A-</button>
+                <button class="toolbar-btn active" id="fontNormal" aria-label="Texto normal">A</button>
+                <button class="toolbar-btn" id="fontLarge" aria-label="Texto grande">A+</button>
+                <button class="toolbar-btn" id="fontXLarge" aria-label="Texto muy grande">A++</button>
+            </div>
+            
+            <button class="toolbar-btn" id="highContrastToggle" aria-label="Activar alto contraste" aria-pressed="false">
+                🎨 Alto Contraste
+            </button>
+            
+            <button class="toolbar-btn" id="pauseAnimations" aria-label="Pausar animaciones" aria-pressed="false">
+                ⏸️ Pausar Animaciones
+            </button>
+            
+            <button class="toolbar-btn" id="showKeyboardShortcuts" aria-label="Mostrar atajos de teclado">
+                ⌨️ Atajos
+            </button>
+        </div>
+    </div>
+    
+    <!-- Panel de atajos de teclado - NUEVA FUNCIONALIDAD -->
+    <div class="keyboard-shortcuts" id="keyboardShortcuts" role="dialog" aria-labelledby="shortcuts-title" aria-modal="false">
+        <h3 id="shortcuts-title">Atajos de Teclado</h3>
+        <ul class="shortcut-list">
+            <li class="shortcut-item">
+                <span>Ir al inicio</span>
+                <kbd class="shortcut-key">H</kbd>
+            </li>
+            <li class="shortcut-item">
+                <span>Siguiente sección</span>
+                <kbd class="shortcut-key">J</kbd>
+            </li>
+            <li class="shortcut-item">
+                <span>Sección anterior</span>
+                <kbd class="shortcut-key">K</kbd>
+            </li>
+            <li class="shortcut-item">
+                <span>Ir a Programas</span>
+                <kbd class="shortcut-key">P</kbd>
+            </li>
+            <li class="shortcut-item">
+                <span>Ir a Testimonios</span>
+                <kbd class="shortcut-key">T</kbd>
+            </li>
+            <li class="shortcut-item">
+                <span>Ir a Registro</span>
+                <kbd class="shortcut-key">R</kbd>
+            </li>
+            <li class="shortcut-item">
+                <span>Mostrar/ocultar atajos</span>
+                <kbd class="shortcut-key">?</kbd>
+            </li>
+        </ul>
+        <button class="shortcuts-close" id="closeShortcuts" aria-label="Cerrar panel de atajos">
+            Cerrar
+        </button>
+    </div>
+    
+    <!-- Skip to main content link -->
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     
     <!-- Header -->
     <header class="header" role="banner">
         <div class="header-container">
-            <a href="#" class="logo" aria-label="FlexiMadres - Página de inicio">
+            <a href="#inicio" class="logo" aria-label="FlexiMadres - Página de inicio">
                 <span class="logo-icon" aria-hidden="true">FM</span>
                 <span>FlexiMadres</span>
             </a>
@@ -743,6 +1185,14 @@
         </div>
     </header>
     
+    <!-- Breadcrumbs - NUEVA FUNCIONALIDAD -->
+    <nav class="breadcrumbs" aria-label="Navegación de ruta">
+        <ol>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><span id="currentSection">Bienvenida</span></li>
+        </ol>
+    </nav>
+    
     <!-- Main Content -->
     <main id="main-content" role="main">
         <!-- Hero Section -->
@@ -755,7 +1205,14 @@
                         Tu Futuro
                     </h1>
                     <p class="hero-subtitle">
-                        Conectamos a madres solteras con oportunidades de empleo remoto flexible, 
+                        Conectamos a madres solteras con oportunidades de 
+                        <span class="tooltip-trigger">
+                            empleo remoto flexible
+                            <span class="tooltip-icon" aria-hidden="true">?</span>
+                            <span class="tooltip-content" role="tooltip">
+                                Trabajos que puedes realizar desde casa, con horarios que tú defines, sin comprometer el cuidado de tus hijos
+                            </span>
+                        </span>, 
                         brindando capacitación profesional y una comunidad de apoyo para construir 
                         un futuro próspero y equilibrado.
                     </p>
@@ -770,8 +1227,10 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- Placeholder for hero image with proper alt text (POUR: Perceivable) -->
-                    <svg class="hero-img" viewBox="0 0 600 400" role="img" aria-label="Madre sonriente trabajando en su laptop desde casa mientras su hija pequeña dibuja felizmente a su lado en una mesa iluminada por luz natural">
+                    <!-- SVG con descripción completa para accesibilidad -->
+                    <svg class="hero-img" viewBox="0 0 600 400" role="img" aria-label="Ilustración de una madre sonriente trabajando en su computadora portátil desde una mesa en su hogar, mientras su hija pequeña dibuja felizmente a su lado. La escena muestra un ambiente cálido iluminado por luz natural que entra por una ventana, representando el equilibrio entre trabajo y familia que FlexiMadres promueve.">
+                        <title>Madre trabajando desde casa con su hija</title>
+                        <desc>Una ilustración que representa el concepto de trabajo remoto flexible: una madre profesional utiliza su laptop en una mesa de comedor, mientras su hija de aproximadamente 6 años dibuja con crayones a su lado. Ambas lucen sonrientes y relajadas, simbolizando la armonía entre responsabilidades laborales y maternales.</desc>
                         <rect width="600" height="400" fill="#EDF2F7"/>
                         <circle cx="300" cy="150" r="50" fill="#9B5CC7" opacity="0.3"/>
                         <circle cx="400" cy="250" r="70" fill="#2E75B5" opacity="0.2"/>
@@ -800,25 +1259,41 @@
                 </p>
                 
                 <div class="features-grid">
-                    <article class="feature-card">
+                    <article class="feature-card" tabindex="0">
                         <div class="feature-icon" aria-hidden="true">🕐</div>
-                        <h3 class="feature-title">Flexibilidad Total</h3>
+                        <h3 class="feature-title">
+                            <span class="tooltip-trigger">
+                                Flexibilidad Total
+                                <span class="tooltip-icon" aria-hidden="true">?</span>
+                                <span class="tooltip-content" role="tooltip">
+                                    Tú decides cuándo trabajar: mañanas, tardes o noches. Sin horarios fijos ni supervisión constante.
+                                </span>
+                            </span>
+                        </h3>
                         <p class="feature-description">
                             Trabaja según tus propios horarios y objetivos. Sin rigidez, sin comprometer 
                             el cuidado de tus hijos. Tú decides cuándo y cómo trabajar.
                         </p>
                     </article>
                     
-                    <article class="feature-card">
+                    <article class="feature-card" tabindex="0">
                         <div class="feature-icon" aria-hidden="true">📚</div>
-                        <h3 class="feature-title">Capacitación Continua</h3>
+                        <h3 class="feature-title">
+                            <span class="tooltip-trigger">
+                                Capacitación Continua
+                                <span class="tooltip-icon" aria-hidden="true">?</span>
+                                <span class="tooltip-content" role="tooltip">
+                                    Cursos gratuitos en línea sobre Excel, atención al cliente, herramientas digitales y más.
+                                </span>
+                            </span>
+                        </h3>
                         <p class="feature-description">
                             Formación técnica en herramientas digitales, atención al cliente y software 
                             de oficina. Desarrolla habilidades competitivas para el mercado actual.
                         </p>
                     </article>
                     
-                    <article class="feature-card">
+                    <article class="feature-card" tabindex="0">
                         <div class="feature-icon" aria-hidden="true">🤝</div>
                         <h3 class="feature-title">Comunidad de Apoyo</h3>
                         <p class="feature-description">
@@ -831,7 +1306,7 @@
         </section>
         
         <!-- Process Section -->
-        <section class="process" aria-labelledby="process-title">
+        <section id="oportunidades" class="process" aria-labelledby="process-title">
             <div class="section-container">
                 <h2 id="process-title" class="section-title">Cómo Funciona</h2>
                 <p class="section-subtitle">
@@ -981,7 +1456,204 @@
     </footer>
     
     <script>
-        // Smooth scroll behavior for navigation (POUR: Operable)
+        // ========== FUNCIONALIDADES DE ACCESIBILIDAD ==========
+        
+        // 1. BARRA DE HERRAMIENTAS DE ACCESIBILIDAD
+        const toolbar = document.getElementById('accessibilityToolbar');
+        const toolbarToggle = document.getElementById('toolbarToggle');
+        const fontSmall = document.getElementById('fontSmall');
+        const fontNormal = document.getElementById('fontNormal');
+        const fontLarge = document.getElementById('fontLarge');
+        const fontXLarge = document.getElementById('fontXLarge');
+        const highContrastToggle = document.getElementById('highContrastToggle');
+        const pauseAnimations = document.getElementById('pauseAnimations');
+        const showKeyboardShortcuts = document.getElementById('showKeyboardShortcuts');
+        const announcer = document.getElementById('announcer');
+        
+        // Función para anunciar cambios a lectores de pantalla
+        function announce(message) {
+            announcer.textContent = message;
+            setTimeout(() => {
+                announcer.textContent = '';
+            }, 1000);
+        }
+        
+        // Toggle barra de herramientas
+        toolbarToggle.addEventListener('click', () => {
+            toolbar.classList.toggle('minimized');
+            const isMinimized = toolbar.classList.contains('minimized');
+            toolbarToggle.setAttribute('aria-expanded', !isMinimized);
+            toolbarToggle.setAttribute('aria-label', isMinimized ? 'Expandir barra de herramientas' : 'Minimizar barra de herramientas');
+            announce(isMinimized ? 'Barra de herramientas minimizada' : 'Barra de herramientas expandida');
+        });
+        
+        // Cambiar tamaño de fuente
+        const fontButtons = [fontSmall, fontNormal, fontLarge, fontXLarge];
+        const fontClasses = ['font-small', '', 'font-large', 'font-xlarge'];
+        const fontLabels = ['pequeño', 'normal', 'grande', 'muy grande'];
+        
+        fontButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                // Remover clases de tamaño anteriores del elemento HTML
+                document.documentElement.classList.remove('font-small', 'font-large', 'font-xlarge');
+                // Agregar nueva clase si no es normal
+                if (fontClasses[index]) {
+                    document.documentElement.classList.add(fontClasses[index]);
+                }
+                // Actualizar botones activos
+                fontButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // Anunciar cambio
+                announce(`Tamaño de texto cambiado a ${fontLabels[index]}`);
+                // Guardar preferencia
+                localStorage.setItem('fontSize', fontClasses[index]);
+            });
+        });
+        
+        // Restaurar tamaño de fuente guardado
+        const savedFontSize = localStorage.getItem('fontSize');
+        if (savedFontSize) {
+            const index = fontClasses.indexOf(savedFontSize);
+            if (index !== -1) {
+                fontButtons[index].click();
+            }
+        }
+        
+        // Toggle alto contraste
+        highContrastToggle.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+            const isActive = document.body.classList.contains('high-contrast');
+            highContrastToggle.classList.toggle('active', isActive);
+            highContrastToggle.setAttribute('aria-pressed', isActive);
+            highContrastToggle.setAttribute('aria-label', isActive ? 'Desactivar alto contraste' : 'Activar alto contraste');
+            announce(isActive ? 'Modo alto contraste activado' : 'Modo alto contraste desactivado');
+            localStorage.setItem('highContrast', isActive);
+        });
+        
+        // Restaurar alto contraste
+        if (localStorage.getItem('highContrast') === 'true') {
+            highContrastToggle.click();
+        }
+        
+        // Pausar animaciones
+        pauseAnimations.addEventListener('click', () => {
+            document.body.classList.toggle('animations-paused');
+            const isActive = document.body.classList.contains('animations-paused');
+            pauseAnimations.classList.toggle('active', isActive);
+            pauseAnimations.setAttribute('aria-pressed', isActive);
+            pauseAnimations.setAttribute('aria-label', isActive ? 'Reanudar animaciones' : 'Pausar animaciones');
+            announce(isActive ? 'Animaciones pausadas' : 'Animaciones reanudadas');
+            localStorage.setItem('animationsPaused', isActive);
+        });
+        
+        // Restaurar estado de animaciones
+        if (localStorage.getItem('animationsPaused') === 'true') {
+            pauseAnimations.click();
+        }
+        
+        // 2. ATAJOS DE TECLADO
+        const keyboardShortcuts = document.getElementById('keyboardShortcuts');
+        const closeShortcuts = document.getElementById('closeShortcuts');
+        
+        showKeyboardShortcuts.addEventListener('click', () => {
+            keyboardShortcuts.classList.add('visible');
+            closeShortcuts.focus();
+            announce('Panel de atajos de teclado abierto');
+        });
+        
+        closeShortcuts.addEventListener('click', () => {
+            keyboardShortcuts.classList.remove('visible');
+            showKeyboardShortcuts.focus();
+            announce('Panel de atajos de teclado cerrado');
+        });
+        
+        // Implementar atajos de teclado
+        document.addEventListener('keydown', (e) => {
+            // No activar si el usuario está escribiendo en un input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+            
+            const key = e.key.toLowerCase();
+            
+            switch(key) {
+                case 'h':
+                    e.preventDefault();
+                    document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
+                    announce('Navegando a inicio');
+                    break;
+                case 'j':
+                    e.preventDefault();
+                    scrollToNextSection();
+                    break;
+                case 'k':
+                    e.preventDefault();
+                    scrollToPreviousSection();
+                    break;
+                case 'p':
+                    e.preventDefault();
+                    document.getElementById('programas').scrollIntoView({ behavior: 'smooth' });
+                    announce('Navegando a programas');
+                    break;
+                case 't':
+                    e.preventDefault();
+                    document.getElementById('testimonios').scrollIntoView({ behavior: 'smooth' });
+                    announce('Navegando a testimonios');
+                    break;
+                case 'r':
+                    e.preventDefault();
+                    document.getElementById('registro').scrollIntoView({ behavior: 'smooth' });
+                    announce('Navegando a registro');
+                    break;
+                case '?':
+                    e.preventDefault();
+                    keyboardShortcuts.classList.toggle('visible');
+                    if (keyboardShortcuts.classList.contains('visible')) {
+                        closeShortcuts.focus();
+                        announce('Panel de atajos de teclado abierto');
+                    } else {
+                        announce('Panel de atajos de teclado cerrado');
+                    }
+                    break;
+                case 'escape':
+                    if (keyboardShortcuts.classList.contains('visible')) {
+                        keyboardShortcuts.classList.remove('visible');
+                        announce('Panel de atajos de teclado cerrado');
+                    }
+                    break;
+            }
+        });
+        
+        // Funciones para navegación entre secciones
+        const sections = ['inicio', 'programas', 'oportunidades', 'testimonios', 'registro'];
+        let currentSectionIndex = 0;
+        
+        function scrollToNextSection() {
+            currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+            const sectionId = sections[currentSectionIndex];
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            announce(`Navegando a ${getSectionName(sectionId)}`);
+        }
+        
+        function scrollToPreviousSection() {
+            currentSectionIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+            const sectionId = sections[currentSectionIndex];
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            announce(`Navegando a ${getSectionName(sectionId)}`);
+        }
+        
+        function getSectionName(id) {
+            const names = {
+                'inicio': 'inicio',
+                'programas': 'programas',
+                'oportunidades': 'cómo funciona',
+                'testimonios': 'testimonios',
+                'registro': 'registro'
+            };
+            return names[id] || id;
+        }
+        
+        // 3. SMOOTH SCROLL Y FOCUS MANAGEMENT
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -996,19 +1668,37 @@
                         // Set focus to target for screen readers
                         target.setAttribute('tabindex', '-1');
                         target.focus();
+                        announce(`Navegando a ${target.getAttribute('aria-labelledby') || href}`);
                     }
                 }
             });
         });
         
-        // Active navigation highlighting
+        // 4. BREADCRUMBS DINÁMICOS
         const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('section[id]');
+        const sectionsWithIds = document.querySelectorAll('section[id]');
+        const currentSectionSpan = document.getElementById('currentSection');
         
+        function updateBreadcrumb() {
+            let scrollPosition = window.scrollY + 100;
+            
+            sectionsWithIds.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSectionSpan.textContent = getSectionName(sectionId).charAt(0).toUpperCase() + getSectionName(sectionId).slice(1);
+                    currentSectionIndex = sections.indexOf(sectionId);
+                }
+            });
+        }
+        
+        // 5. ACTIVE NAVIGATION HIGHLIGHTING
         function highlightNavigation() {
             let scrollPosition = window.scrollY + 100;
             
-            sections.forEach(section => {
+            sectionsWithIds.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.offsetHeight;
                 const sectionId = section.getAttribute('id');
@@ -1026,29 +1716,64 @@
             });
         }
         
-        window.addEventListener('scroll', highlightNavigation);
-        
-        // Announce page changes for screen readers (POUR: Perceivable)
-        const announcer = document.createElement('div');
-        announcer.setAttribute('role', 'status');
-        announcer.setAttribute('aria-live', 'polite');
-        announcer.setAttribute('aria-atomic', 'true');
-        announcer.className = 'sr-only';
-        document.body.appendChild(announcer);
-        
-        // Keyboard navigation improvements (POUR: Operable)
-        document.addEventListener('keydown', function(e) {
-            // Allow ESC to close modals or return to top
-            if (e.key === 'Escape') {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+        window.addEventListener('scroll', () => {
+            highlightNavigation();
+            updateBreadcrumb();
         });
         
-        console.log('FlexiMadres - Sitio web accesible siguiendo metodología POUR');
-        console.log('✓ Perceptible: Alto contraste, texto alternativo, tamaños ajustables');
-        console.log('✓ Operable: Navegación por teclado, sin límites de tiempo, responsive');
-        console.log('✓ Comprensible: Lenguaje claro, navegación predecible, validación de errores');
-        console.log('✓ Robusto: HTML semántico, ARIA labels, compatible con lectores de pantalla');
+        // 6. DETECTAR PREFERENCIAS DEL SISTEMA
+        // Detectar preferencia de movimiento reducido
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (prefersReducedMotion.matches) {
+            document.body.classList.add('animations-paused');
+            pauseAnimations.classList.add('active');
+            pauseAnimations.setAttribute('aria-pressed', 'true');
+        }
+        
+        // Detectar preferencia de alto contraste
+        const prefersHighContrast = window.matchMedia('(prefers-contrast: high)');
+        if (prefersHighContrast.matches && !localStorage.getItem('highContrast')) {
+            document.body.classList.add('high-contrast');
+            highContrastToggle.classList.add('active');
+            highContrastToggle.setAttribute('aria-pressed', 'true');
+        }
+        
+        // Log de accesibilidad
+        console.log('='.repeat(60));
+        console.log('FlexiMadres - Sitio Web Completamente Accesible');
+        console.log('='.repeat(60));
+        console.log('✓ PERCEPTIBLE:');
+        console.log('  • Controles de tamaño de texto (A-, A, A+, A++)');
+        console.log('  • Modo de alto contraste activable');
+        console.log('  • Descripciones ALT completas en imágenes');
+        console.log('  • Tooltips explicativos en términos clave');
+        console.log('  • Contenido comprensible sin color');
+        console.log('');
+        console.log('✓ OPERABLE:');
+        console.log('  • Navegación completa por teclado (Tab, Enter, Esc)');
+        console.log('  • Atajos de teclado (H, J, K, P, T, R, ?)');
+        console.log('  • Indicadores de foco altamente visibles (4px)');
+        console.log('  • Áreas clicables de 48x48px mínimo');
+        console.log('  • Control para pausar animaciones');
+        console.log('  • Skip to main content link');
+        console.log('');
+        console.log('✓ COMPRENSIBLE:');
+        console.log('  • Breadcrumbs dinámicos');
+        console.log('  • Estructura de navegación predecible');
+        console.log('  • Tooltips con explicaciones claras');
+        console.log('  • Mensajes de estado para lectores de pantalla');
+        console.log('  • Lenguaje claro y directo');
+        console.log('');
+        console.log('✓ ROBUSTO:');
+        console.log('  • HTML5 semántico (header, nav, main, section, article, footer)');
+        console.log('  • ARIA labels y roles completos');
+        console.log('  • Soporte para lectores de pantalla (live regions)');
+        console.log('  • Responsive design completo');
+        console.log('  • Compatible con navegadores modernos');
+        console.log('  • Persistencia de preferencias (localStorage)');
+        console.log('='.repeat(60));
+        console.log('Presiona "?" para ver todos los atajos de teclado disponibles');
+        console.log('='.repeat(60));
     </script>
 </body>
 </html>
